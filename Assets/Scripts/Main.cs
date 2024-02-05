@@ -59,7 +59,7 @@ public class Main : MonoBehaviour
         judgeManager.ScoreInit();
         gridObjectManager.GridInit();
         squareManager.startInit();
-        debugManager.DebugTextInit(gridObjectManager.GridSquare, debugManager.tmpTemplate, debugManager.InfoDebugTextArray, debugManager.DebugTextParent);
+        //debugManager.DebugTextInit(gridObjectManager.GridSquare, debugManager.tmpTemplate, debugManager.InfoDebugTextArray, debugManager.DebugTextParent);
 
         gridObserver.ArrayInfoInit(gridObserver.gameSquareInfoArray);
         gridObserver.ArrayBoolInfoInit(gridObserver.gameSquareBoolArray);
@@ -83,7 +83,7 @@ public class Main : MonoBehaviour
                 gamePhase = 2;
                 break;
             case 2:
-                //ìÆÇ©ÇπÇÈÉtÉFÅ[ÉY
+                //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩtÔøΩFÔøΩ[ÔøΩY
                 squareManager.SquareMove(playerInput.MoveKeyInput(), holizontalMoveSpeed, virticalFallSpeed, 0f, gridObjectManager.GridSquare, verticalMoveSpeed, playerInput.RotateKeyInput());
                 //sphereManager.SphereRotate(playerInput.RotateKeyInput(), 100);
                 if (Input.GetKeyDown(KeyCode.U) && squareManager.srot == true)//add
@@ -100,7 +100,7 @@ public class Main : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     gamePhase = 3;
-                    //Debug.Log("ÉtÉFÅ[ÉYÅF" + gamePhase);
+                    //Debug.Log("ÔøΩtÔøΩFÔøΩ[ÔøΩYÔøΩF" + gamePhase);
                 }
 
                 //if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -125,7 +125,7 @@ public class Main : MonoBehaviour
                     
                     squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                     
-                    debugManager.InfoTextRegistration(n, debugManager.InfoDebugTextArray, gridObserver.gameSquareInfoArray);
+                    //debugManager.InfoTextRegistration(n, debugManager.InfoDebugTextArray, gridObserver.gameSquareInfoArray);
                     //debugManager.BoolTextRegistration(n, debugManager.InfoDebugTextArray, gridObserver.gameSphereBoolArray);
                     gridObjectManager.gridObjectArray[n].SetActive(true);
                 }
@@ -138,15 +138,15 @@ public class Main : MonoBehaviour
                 bool animate = false;
                 for (int i = 0; i < gridObserver.gameSquareInfoArray.Length; i++)
                 {
-                    //0.óéâ∫â¬î\ê´îzóÒ 1ÇÃÉCÉìÉfÉbÉNÉXÇÃÇ›åvéZÉXÉ^Å[Ég
-                    //1.êîéöÅ@é©ï™ÇÃé¸ÇË4Ç¬Çå©ÇÈ
-                    //2.22 ÇÃéû n = 2 ÇªÇÍà»äOÇÕ1
+                    //0.ÔøΩÔøΩÔøΩÔøΩÔøΩ¬î\ÔøΩÔøΩÔøΩzÔøΩÔøΩ 1ÔøΩÃÉCÔøΩÔøΩÔøΩfÔøΩbÔøΩNÔøΩXÔøΩÃÇ›åvÔøΩZÔøΩXÔøΩ^ÔøΩ[ÔøΩg
+                    //1.ÔøΩÔøΩÔøΩÔøΩÔøΩ@ÔøΩÔøΩÔøΩÔøΩÔøΩÃéÔøΩÔøΩÔøΩ4ÔøΩ¬ÇÔøΩÔøΩÔøΩÔøΩÔøΩ
+                    //2.22 ÔøΩÃéÔøΩ n = 2 ÔøΩÔøΩÔøΩÔøΩ»äOÔøΩÔøΩ1
                     gridObserver.NumFallPossibilitySet(i, gridObserver.gameSquareInfoArray, gridObserver.gameSquareBoolArray, pastDelete);
 
-                    debugManager.InfoTextRegistration(i, debugManager.InfoDebugTextArray, gridObserver.gameSquareInfoArray);
+                    //debugManager.InfoTextRegistration(i, debugManager.InfoDebugTextArray, gridObserver.gameSquareInfoArray);
                     //debugManager.BoolTextRegistration(i, debugManager.InfoDebugTextArray, gridObserver.gameSphereBoolArray);
 
-                    //óéÇøÇ»Ç¢èÍçáÇÕÉäÉ^Å[Éì
+                    //ÔøΩÔøΩÔøΩÔøΩÔøΩ»ÇÔøΩÔøΩÍçáÔøΩÕÉÔøΩÔøΩ^ÔøΩ[ÔøΩÔøΩ
                     if (gridObserver.gameSquareBoolArray[i] != 1)
                     {
                         continue;
@@ -160,14 +160,14 @@ public class Main : MonoBehaviour
 
                 if (animate)
                 {
-                    //óéâ∫ÉAÉjÉÅÅ[ÉVÉáÉìÇ÷
-                    //Debug.Log("ÉAÉjÉÅÅ[ÉVÉáÉìäJén");
+                    //ÔøΩÔøΩÔøΩÔøΩÔøΩAÔøΩjÔøΩÔøΩÔøΩ[ÔøΩVÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
+                    //Debug.Log("ÔøΩAÔøΩjÔøΩÔøΩÔøΩ[ÔøΩVÔøΩÔøΩÔøΩÔøΩÔøΩJÔøΩn");
                     gamePhase = 5;
                 }
                 else
                 {
                     StartCoroutine(judgeManager.ScoreAnimation(4.0f, 0.2f));
-                    //ÉwÉLÉTÉSÉìîªíËÉtÉFÅ[ÉYÇ÷
+                    //ÔøΩwÔøΩLÔøΩTÔøΩSÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩtÔøΩFÔøΩ[ÔøΩYÔøΩÔøΩ
                     gamePhase = 7;
                 }
                 break;
@@ -185,33 +185,33 @@ public class Main : MonoBehaviour
                     //}
 
 
-                    //Debug.Log(iNum + "Ç©ÇÁ" + iNumInto + "Ç÷");
+                    //Debug.Log(iNum + "ÔøΩÔøΩÔøΩÔøΩ" + iNumInto + "ÔøΩÔøΩ");
 
                     //sphereManager.SphereFallAnimationOmega(iNum, iNumInto, gridObjectManager.gridObjectArray, sphereManager.gameSphereArray, 0.2f);
 
                     squareManager.SquareFallAnimationAlfa(iNum, iNumInto, gridObjectManager.gridObjectArray, squareManager.gameSquareArray);
                     
                     squareManager.gameSquareArray[iNumInto] = squareManager.gameSquareArray[iNum];
-                    //Debug.Log(iNum + "ÇÕ" + iNumInto + "Ç…ìûíÖÇµÇ‹ÇµÇΩ");
-                    //Debug.Log("ÉäÉXÉgÇÃÇ»Ç™Ç≥:" + (gridObserver.FallBallIndexList.Count - 1));
+                    //Debug.Log(iNum + "ÔøΩÔøΩ" + iNumInto + "ÔøΩ…ìÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ‹ÇÔøΩÔøΩÔøΩ");
+                    //Debug.Log("ÔøΩÔøΩÔøΩXÔøΩgÔøΩÃÇ»ÇÔøΩÔøΩÔøΩ:" + (gridObserver.FallBallIndexList.Count - 1));
                     //gridObserver.FallBallIndexList.RemoveAt(i);
                 }
                 gridObserver.FallBallIndexList.Clear();
                 
                 if (gridObserver.FallBallIndexList.Count < 1)
                 {
-                    //éüÇÃÉXÉeÉbÉv
-                   // Debug.Log("ÉAÉjÉÅÅ[ÉVÉáÉìèIóπ");
+                    //ÔøΩÔøΩÔøΩÃÉXÔøΩeÔøΩbÔøΩv
+                   // Debug.Log("ÔøΩAÔøΩjÔøΩÔøΩÔøΩ[ÔøΩVÔøΩÔøΩÔøΩÔøΩÔøΩIÔøΩÔøΩ");
                     gamePhase = 4;
                     
                 }
                 else
                 {
                     
-                    //ÉAÉjÉÅÅ[ÉVÉáÉìÉtÉFÅ[ÉYåJÇËï‘Çµ
-                    //Debug.Log("ç°ÇÃà íuÅF" + sphereManager.gameSphereArray[Number].transform.position.x.ToString("f2") + ","
+                    //ÔøΩAÔøΩjÔøΩÔøΩÔøΩ[ÔøΩVÔøΩÔøΩÔøΩÔøΩÔøΩtÔøΩFÔøΩ[ÔøΩYÔøΩJÔøΩÔøΩ‘ÇÔøΩ
+                    //Debug.Log("ÔøΩÔøΩÔøΩÃà íuÔøΩF" + sphereManager.gameSphereArray[Number].transform.position.x.ToString("f2") + ","
                     //    + sphereManager.gameSphereArray[Number].transform.position.y.ToString("f2"));
-                    //Debug.Log("ñ⁄ìIínÅF" + gridObjectManager.gridObjectArray[NumInto].transform.position.x.ToString("f2") + ","
+                    //Debug.Log("ÔøΩ⁄ìIÔøΩnÔøΩF" + gridObjectManager.gridObjectArray[NumInto].transform.position.x.ToString("f2") + ","
                     //    + gridObjectManager.gridObjectArray[NumInto].transform.position.y.ToString("f2"));
                     gamePhase = 5;
                 }
@@ -221,7 +221,7 @@ public class Main : MonoBehaviour
                 int Keseta = judgeManager.ShapeJudgement(gridObserver.gameSquareInfoArray, squareManager.gameSquareArray, gridObserver.gameSquareBoolArray);
                 if (Keseta == 0)
                 {
-                    //éüÇÃÉsÅ[ÉXÇóéÇ∆Ç∑
+                    //ÔøΩÔøΩÔøΩÃÉsÔøΩ[ÔøΩXÔøΩóéÇ∆ÇÔøΩ
                     pastDelete = false;
                     for (int n = 0; n < gridObserver.gameSquareInfoArray.Length; n++)
                     {
@@ -238,7 +238,7 @@ public class Main : MonoBehaviour
                 }
                 else if (Keseta == 1)
                 {
-                    //çƒìxóéâ∫îªíËÇ÷
+                    //ÔøΩƒìxÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
                     //Debug.Log("1");
                     StartCoroutine(DelayedGamePhase4(delayTime));
                     //Debug.Log("2");
@@ -247,8 +247,8 @@ public class Main : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log("ÉXÉyÉVÉÉÉãê∂ê¨íÜ");
-                    StartCoroutine(DelayedGamePhase4(specialDelayTime * (Keseta - 1)));//add KesetaÇÕì¡éÍÉGÉtÉFÉNÉgÇ™î≠ìÆÇ≈Ç´ÇÈå¬êî+1Ç…ê›íËÇµÇƒÇ†ÇÈÅià”ñ°ÇÌÇ©ÇÒÇ»Ç¢Ç©Ç‡ÇµÇÍÇ»Ç¢ÇØÇ«ìsçáó«Ç©Ç¡ÇΩÅjÇÃÇ≈ÅA-1ÇÇµÇƒå¬êîï™ë“ã@éûä‘Çê›íË
+                    //Debug.Log("ÔøΩXÔøΩyÔøΩVÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ");
+                    StartCoroutine(DelayedGamePhase4(specialDelayTime * (Keseta - 1)));//add KesetaÔøΩÕìÔøΩÔøΩÔøΩGÔøΩtÔøΩFÔøΩNÔøΩgÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ≈ÇÔøΩÔøΩÔøΩ¬êÔøΩ+1ÔøΩ…ê›íËÇµÔøΩƒÇÔøΩÔøΩÔøΩiÔøΩ”ñÔøΩÔøΩÌÇ©ÔøΩÔøΩ»ÇÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ»ÇÔøΩÔøΩÔøΩÔøΩ«ìsÔøΩÔøΩÔøΩ«ÇÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩjÔøΩÃÇ≈ÅA-1ÔøΩÔøΩÔøΩÔøΩÔøΩƒå¬êÔøΩÔøΩÔøΩÔøΩ“ã@ÔøΩÔøΩÔøΩ‘ÇÔøΩ›íÔøΩ
                     //Debug.Log("2");
                     gamePhase = 8;
                 }
@@ -261,29 +261,29 @@ public class Main : MonoBehaviour
                 break;
         }
     }
-    IEnumerator DelayedGamePhase4(float delay)//addÅ@ÉGÉtÉFÉNÉgë“ã@ópÉRÉãÅ[É`ÉìÅië“ã@íÜÇÕgamephase=8Åj
+    IEnumerator DelayedGamePhase4(float delay)//addÔøΩ@ÔøΩGÔøΩtÔøΩFÔøΩNÔøΩgÔøΩ“ã@ÔøΩpÔøΩRÔøΩÔøΩÔøΩ[ÔøΩ`ÔøΩÔøΩÔøΩiÔøΩ“ã@ÔøΩÔøΩÔøΩÔøΩgamephase=8ÔøΩj
     {
         yield return new WaitForSeconds(delay);
 
-        // íxâÑå„ÇÃèàóù
+        // ÔøΩxÔøΩÔøΩÔøΩÔøΩÃèÔøΩÔøΩÔøΩ
         pastDelete = true;
         gamePhase = 4;
         //Debug.Log("1.5");
     }
     void FallMethodAll(int number)
     {
-        //3.n = 1 Å@ÇÃéû êîéöîzóÒÇämîF êîéöÇÃà⁄ìÆêÊÇämîF óéâ∫â¬î\ê´îzóÒãyÇ—êîéöîzóÒÇÃnÇ0Ç…Ç∑ÇÈ
-        //à⁄ìÆêÊÇäiî[Ç∑ÇÈïœêînumInto
+        //3.n = 1 ÔøΩ@ÔøΩÃéÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩzÔøΩÔøΩÔøΩÔøΩmÔøΩF ÔøΩÔøΩÔøΩÔøΩÔøΩÃà⁄ìÔøΩÔøΩÔøΩÔøΩÔøΩmÔøΩF ÔøΩÔøΩÔøΩÔøΩÔøΩ¬î\ÔøΩÔøΩÔøΩzÔøΩÔøΩyÔøΩ—êÔøΩÔøΩÔøΩÔøΩzÔøΩÔøΩÔøΩnÔøΩÔøΩ0ÔøΩ…ÇÔøΩÔøΩÔøΩ
+        //ÔøΩ⁄ìÔøΩÔøΩÔøΩÔøΩÔøΩiÔøΩ[ÔøΩÔøΩÔøΩÔøΩœêÔøΩnumInto
         int numInto = gridObserver.ReturnNumFallInto(number, gridObserver.gameSquareInfoArray);
 
-        //4.êîéöà⁄ìÆ
+        //4.ÔøΩÔøΩÔøΩÔøΩÔøΩ⁄ìÔøΩ
         gridObserver.NumFall(number, numInto, gridObserver.gameSquareInfoArray, gridObserver.gameSquareBoolArray);
 
-        //óéâ∫â¬î\ê´ÇÃçƒämîFÅAîzóÒÇ÷ÇÃë„ì¸
+        //ÔøΩÔøΩÔøΩÔøΩÔøΩ¬î\ÔøΩÔøΩÔøΩÃçƒämÔøΩFÔøΩAÔøΩzÔøΩÔøΩ÷ÇÃëÔøΩÔøΩ
         gridObserver.NumFallPossibilitySet(numInto, gridObserver.gameSquareInfoArray, gridObserver.gameSquareBoolArray, pastDelete);
 
         gridObserver.FallBallAddToList(number, numInto);
-        //ÉfÉoÉbÉOÉeÉLÉXÉg
+        //ÔøΩfÔøΩoÔøΩbÔøΩOÔøΩeÔøΩLÔøΩXÔøΩg
         //debugmanager.infotextregistration(number, debugmanager.infodebugtextarray, gridobserver.gamesphereinfoarray);
         //debugmanager.infotextregistration(numinto, debugmanager.infodebugtextarray, gridobserver.gamesphereinfoarray);
 
@@ -295,17 +295,17 @@ public class Main : MonoBehaviour
 
     //private void SquareMove()
     //{
-    //    // ç∂ñÓàÛÉLÅ[Ç≈ç∂Ç…ìÆÇ≠
+    //    // ÔøΩÔøΩÔøΩÔøΩÔøΩLÔøΩ[ÔøΩ≈çÔøΩÔøΩ…ìÔøΩÔøΩÔøΩ
     //    if (Input.GetKeyDown(KeyCode.LeftArrow))
     //    {
     //        transform.position += new Vector3(-1, 0, 0);
     //    }
-    //    // âEñÓàÛÉLÅ[Ç≈âEÇ…ìÆÇ≠
+    //    // ÔøΩEÔøΩÔøΩÔøΩLÔøΩ[ÔøΩ≈âEÔøΩ…ìÔøΩÔøΩÔøΩ
     //    else if (Input.GetKeyDown(KeyCode.RightArrow))
     //    {
     //        transform.position += new Vector3(1, 0, 0);
     //    }
-    //    // é©ìÆÇ≈â∫Ç…à⁄ìÆÇ≥ÇπÇ¬Ç¬ÅAâ∫ñÓàÛÉLÅ[Ç≈Ç‡à⁄ìÆÇ∑ÇÈ
+    //    // ÔøΩÔøΩÔøΩÔøΩÔøΩ≈âÔøΩÔøΩ…à⁄ìÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ¬Ç¬ÅAÔøΩÔøΩÔøΩÔøΩÔøΩLÔøΩ[ÔøΩ≈ÇÔøΩÔøΩ⁄ìÔøΩÔøΩÔøΩÔøΩÔøΩ
     //    else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - previousTime >= fallTime)
     //    {
     //        transform.position += new Vector3(0, -1, 0);
