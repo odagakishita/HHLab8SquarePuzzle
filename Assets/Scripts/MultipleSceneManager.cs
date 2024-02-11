@@ -9,13 +9,17 @@ public class MultipleSceneManager : MonoBehaviour
     [SerializeField]
     choiceAnimation button;
 
+    
+
     public Image choice1;
     public Image choice2;
     // Update is called once per frame
     
     public void SoloSceneStart()
     {
+        //result.ButtonSound();
         SceneManager.LoadScene("start");
+        
     }
 
 
@@ -30,6 +34,7 @@ public class MultipleSceneManager : MonoBehaviour
             if(SquareManager.ballnumbers ==4) SceneManager.LoadScene("MainEasyMode");
             else if (SquareManager.ballnumbers ==5) SceneManager.LoadScene("Main");
         }
+        //result.ButtonSound();
 
     }
 
@@ -37,12 +42,14 @@ public class MultipleSceneManager : MonoBehaviour
     {
         //Animator anim = choice1.GetComponent<Animator>();
         if(button.choice2click) SceneManager.LoadScene("MainEasyMode");
+        //result.ButtonSound();
 
     }
 
     public void SoloSceneMovetoResult()
     {
         SceneManager.LoadScene("result");
+       // result.ButtonSound();
     }
 
 

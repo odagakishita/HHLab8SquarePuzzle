@@ -34,7 +34,7 @@ public class SquareManager : MonoBehaviour
     GameObject nextSquareParent;
 
     Vector2 squareParentStartPoint = new Vector2(4.5f,12.5f);
-    Vector2 nextSquareParentWaitPoint = new Vector2(-7.5f, 10f);
+    Vector2 nextSquareParentWaitPoint = new Vector2(-6.24f, 10.33f);
 
     public bool srot = true;
 

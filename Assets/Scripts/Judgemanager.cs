@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,9 @@ public class Judgemanager : MonoBehaviour
 {
     [SerializeField]
     public TextMeshProUGUI scorepoint;
+
+    //[SerializeField]
+    //public TextMeshProUGUI combopoint;
 
     public static float score = 0;
 
@@ -32,9 +36,17 @@ public class Judgemanager : MonoBehaviour
     List<int> DeleteColorList;
     public float delayTime;
 
+    [NonSerialized] public int combo;
+
     // Start is called before the first frame update
+    //public void ComboInit()
+    //{
+    //    combo = 0;
+    //    combopoint.text = combo.ToString();
+    //}
     public void ScoreInit()
     {
+        combo = 0;
         score = 0;
         scorepoint.text = score.ToString();
 
@@ -103,6 +115,8 @@ public class Judgemanager : MonoBehaviour
             if (Data.Count > 0)
             {
                 soundManager.DestroySound();
+                combo++;
+                //combopoint.text = combo.ToString();
                 int addscore = 0;
                 for (int i = 0; i < Data.Count; i++)
                 {
@@ -338,6 +352,8 @@ public class Judgemanager : MonoBehaviour
             
             yield return new WaitForSeconds(delayTime);
             soundManager.Destroy2Sound();
+            combo++;
+            //combopoint.text = combo.ToString();
             for (int index = 0; index < GSIArray.Length; index++)
             {
                 addscore++;

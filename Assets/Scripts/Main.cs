@@ -68,6 +68,8 @@ public class Main : MonoBehaviour
 
     float time;
 
+    //int combo;
+
     //squareManager.startInit();
     private void Awake()
     {
@@ -77,6 +79,7 @@ public class Main : MonoBehaviour
     }
     void Start()
     {
+        //combo = 0;
         if (SceneManager.GetActiveScene().name == "MainEasyMode")
         {
 
@@ -109,9 +112,9 @@ public class Main : MonoBehaviour
         switch (gamePhase)
         {
             case 1:
-                
+               // combo = 0;
                 squareManager.squareParentInit();
-
+                //judgeManager.ComboInit();
                 squareManager.nowSquareInit();
                 squareManager.nextSquareInit();
 
