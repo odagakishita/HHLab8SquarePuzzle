@@ -124,12 +124,12 @@ public class Main : MonoBehaviour
                 //��������t�F�[�Y
                 squareManager.SquareMove(playerInput.MoveKeyInput(), holizontalMoveSpeed, virticalFallSpeed, 0f, gridObjectManager.GridSquare, verticalMoveSpeed, playerInput.RotateKeyInput());
                 //sphereManager.SphereRotate(playerInput.RotateKeyInput(), 100);
-                if (Input.GetKeyDown(KeyCode.U) && squareManager.srot == true)//add
+                if (Input.GetKeyDown(KeyCode.R) && squareManager.srot == true)//add
                 {
                     squareManager.srot = false;
                     StartCoroutine(squareManager.Rotate(rotateSpeed, 1f));
                 }
-                else if (Input.GetKeyDown(KeyCode.J) && squareManager.srot == true)//add
+                else if (Input.GetKeyDown(KeyCode.F) && squareManager.srot == true)//add
                 {
                     squareManager.srot = false;
                     StartCoroutine(squareManager.Rotate(rotateSpeed, -1f));
