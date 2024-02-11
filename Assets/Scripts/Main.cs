@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using Photon.Pun.UtilityScripts;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
@@ -10,7 +13,10 @@ public class Main : MonoBehaviour
     //public float previousTime;
     //public Vector3 rotationPoint;
     // Start is called before the first frame update
-    
+
+    [SerializeField]
+    SoundManager soundManager;
+
 
     [SerializeField]
     SquareManager squareManager;
@@ -30,6 +36,9 @@ public class Main : MonoBehaviour
     [SerializeField]
     Judgemanager judgeManager;
 
+    [SerializeField]
+    TimerData timerData;
+
     [Range(0, 10)]
     public float holizontalMoveSpeed;
 
@@ -45,6 +54,10 @@ public class Main : MonoBehaviour
     [Range(0, 5)]
     public float delayTime;
 
+    [SerializeField] private Image uiFill;
+    [SerializeField] private TextMeshProUGUI uiText;
+    [SerializeField] private float CountTime = 10;
+
     LayerMask gridMask = 1 << 6;
 
     public float rotateSpeed;//add
@@ -53,10 +66,25 @@ public class Main : MonoBehaviour
 
     bool pastDelete = false;
 
+    float time;
+
     //squareManager.startInit();
+    private void Awake()
+    {
+        time = CountTime;
+        timerData.TimeInit(uiFill, uiText, CountTime,time);
+        
+    }
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "MainEasyMode")
+        {
+
+            SquareManager.ballnumbers = 4;
+        }
+        else SquareManager.ballnumbers = 5;
         judgeManager.ScoreInit();
+        soundManager.AudioInit();
         gridObjectManager.GridInit();
         squareManager.startInit();
         //debugManager.DebugTextInit(gridObjectManager.GridSquare, debugManager.tmpTemplate, debugManager.InfoDebugTextArray, debugManager.DebugTextParent);
@@ -67,10 +95,17 @@ public class Main : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
 
+
+        //    Debug.Log(gamePhase);
+        //    //gamePhase = 3;
+        //}
+        float timer = CountTime;
+        CountTime = timerData.TimeCount(uiFill,uiText,timer,time);
         switch (gamePhase)
         {
             case 1:
@@ -99,8 +134,10 @@ public class Main : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+
+                    
+                    //Debug.Log("spaceぼたんをクリックしてる" + gamePhase);
                     gamePhase = 3;
-                    //Debug.Log("�t�F�[�Y�F" + gamePhase);
                 }
 
                 //if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -113,6 +150,7 @@ public class Main : MonoBehaviour
                 //}
                 break;
             case 3:
+                squareManager.zeroRigid();
                 gridObserver.GridTrack(squareManager.nowSquareArray, 0.5f, gridMask, gridObserver.gameSquareInfoArray, squareManager.gameSquareArray, gridObjectManager.gridObjectArray, 500);
 
                 for (int n = 0; n < gridObserver.gameSquareInfoArray.Length; n++)
@@ -166,6 +204,8 @@ public class Main : MonoBehaviour
                 }
                 else
                 {
+
+                    soundManager.FalledSound();
                     StartCoroutine(judgeManager.ScoreAnimation(4.0f, 0.2f));
                     //�w�L�T�S������t�F�[�Y��
                     gamePhase = 7;
@@ -233,6 +273,15 @@ public class Main : MonoBehaviour
 
                         squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                     }
+                    for (int i = 120; i < 140; i++)
+                    {
+                        if (gridObserver.gameSquareBoolArray[i] != 2)
+                        {
+                            continue;
+                        }
+                        gamePhase = 9;
+                        return;
+                    }
                     gamePhase = 1;
                     //Debug.Log("kesenai");
                 }
@@ -256,6 +305,10 @@ public class Main : MonoBehaviour
                 //gamePhase = 1;
                 break;
             case 8:
+                break;
+            case 9:
+                //ゲームオーバー時にここに入る
+                SendMessage("SoloSceneMovetoResult");
                 break;
             default:
                 break;

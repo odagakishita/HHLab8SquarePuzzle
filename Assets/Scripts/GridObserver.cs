@@ -43,7 +43,7 @@ public class GridObserver : MonoBehaviour
             Vector2 size = new Vector2(squareRadius,squareRadius);
             //print("sphere");
             Collider2D[] targetsInSphere = Physics2D.OverlapBoxAll(sphere.transform.position, size, 0f, gridMask);
-            //if (targetsInSphere.Length == 0) continue;
+            if (targetsInSphere.Length == 0) continue;
             //一番距離の近いグリッドを調べる
             int U = GridIdentify(targetsInSphere, sphere, GridObjArray);
             //Debug.Log("グリッドは" + U + "番目");

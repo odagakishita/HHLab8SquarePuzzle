@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SquareManager : MonoBehaviour
 {
+    public static int ballnumbers;
     // Start is called before the first frame update
     [System.NonSerialized]
     public GameObject[] nowSquareArray = new GameObject[4];
@@ -36,6 +37,11 @@ public class SquareManager : MonoBehaviour
     Vector2 nextSquareParentWaitPoint = new Vector2(-7.5f, 10f);
 
     public bool srot = true;
+
+    public void zeroRigid()
+    {
+        sqRigidbody.velocity = Vector2.zero;
+    }
     public void startInit()
     {
         sqRigidbody = squareParent.GetComponent<Rigidbody2D>();
@@ -74,7 +80,7 @@ public class SquareManager : MonoBehaviour
 
     public void nextSquareInit()
     {
-        int randomNumber = Random.Range(0, 2);
+        int randomNumber = 0;//squareのみ
         SquareColorInit(nextSquareColorArray);
         if (randomNumber == 0)
         {
@@ -94,7 +100,7 @@ public class SquareManager : MonoBehaviour
         //4つのボールの色を決め、colorArrayに入れる
         for (int i = 0; i < colorArray.Length; i++)
         {
-            int colorNum = Random.Range(0, 5);
+            int colorNum = Random.Range(0, ballnumbers);
             colorArray[i] = colorNum;
         }
     }

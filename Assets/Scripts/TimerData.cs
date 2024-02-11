@@ -2,19 +2,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class TimerData : MonoBehaviour
 {
-    [SerializeField] private Image uiFill;
-    [SerializeField] private TextMeshProUGUI uiText;
-    [SerializeField] private float CountTime;
-
-    private void Update()
+    
+    public void TimeInit(Image uiFill, TextMeshProUGUI uiText, float CountTime, float time)
     {
-        float timer = CountTime - Time.time;
+        //Debug.Log("hogehoge");
+        float timer = CountTime;
         int minutes = Mathf.FloorToInt(timer / 60);
         int seconds = Mathf.FloorToInt(timer % 60);
-
-        uiFill.fillAmount = Mathf.InverseLerp(0, CountTime, timer);
         uiText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        uiFill.fillAmount = 1;
+        
+    }
+    public float TimeCount(Image uiFill, TextMeshProUGUI uiText, float CountTime, float time)
+    {
+        //Debug.Log(CountTime);
+        CountTime -= Time.deltaTime;
+        int minutes = Mathf.FloorToInt(CountTime / 60);
+        int seconds = Mathf.FloorToInt(CountTime % 60);
+
+        uiFill.fillAmount = Mathf.InverseLerp(0, time, CountTime);
+        uiText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        if (CountTime < 1)
+        {
+            SendMessage("SoloSceneMovetoResult");
+            //Debug.Log("a");
+        }
+        return CountTime;
+
     }
 }

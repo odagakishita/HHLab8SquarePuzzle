@@ -9,11 +9,11 @@ public class Judgemanager : MonoBehaviour
     [SerializeField]
     public TextMeshProUGUI scorepoint;
 
-    float score = 0;
+    public static float score = 0;
 
-    private int square;
-    private int straight;
-    private int normal;
+    //private int square;
+    //private int straight;
+    //private int normal;
 
     public float scoreuptime;
 
@@ -33,11 +33,15 @@ public class Judgemanager : MonoBehaviour
     // Start is called before the first frame update
     public void ScoreInit()
     {
+        score = 0;
         scorepoint.text = score.ToString();
+
     }
 
     public IEnumerator ScoreAnimation(float addscore, float time)
     {
+        //yield return new WaitForSeconds(0.1f);
+
         float before = score;
         float after = score + addscore;
 
@@ -341,5 +345,10 @@ public class Judgemanager : MonoBehaviour
         StartCoroutine(ScoreAnimation(addscore, scoreuptime));
 
 
+    }
+
+    public static float getscore()
+    {
+        return score;
     }
 }
