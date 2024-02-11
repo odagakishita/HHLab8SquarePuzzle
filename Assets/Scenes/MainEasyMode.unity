@@ -7198,7 +7198,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7294,7 +7294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d9c29b8c740bb40b75d7a57e60077d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  falledsound: {fileID: 8300000, guid: 367eb4682912f254196aa55871a5d990, type: 3}
+  destroysound: {fileID: 8300000, guid: 367eb4682912f254196aa55871a5d990, type: 3}
+  falledsound: {fileID: 8300000, guid: 541e251af9404e242a79b28e615117fd, type: 3}
 --- !u!1 &1029922023
 GameObject:
   m_ObjectHideFlags: 0
@@ -13183,6 +13184,7 @@ MonoBehaviour:
   scorepoint: {fileID: 1072231478}
   scoreuptime: 0.2
   breakManager: {fileID: 1113122012}
+  soundManager: {fileID: 1017417461}
   delayTime: 0
 --- !u!1 &1895959774
 GameObject:

@@ -19,6 +19,8 @@ public class Judgemanager : MonoBehaviour
 
     [SerializeField]
     breakManager breakManager;
+    [SerializeField]
+    SoundManager soundManager;
 
     GameObject[] GridObjectArray = new GameObject[100];
     int[] GridIntArray = new int[100];
@@ -100,6 +102,7 @@ public class Judgemanager : MonoBehaviour
         {
             if (Data.Count > 0)
             {
+                soundManager.DestroySound();
                 int addscore = 0;
                 for (int i = 0; i < Data.Count; i++)
                 {
@@ -260,7 +263,7 @@ public class Judgemanager : MonoBehaviour
                     //    GSBArray[index] = 0;
                     //}
 
-                    Debug.Log("ストレイト2　消える色：" + color);
+                    //Debug.Log("ストレイト2　消える色：" + color);
                     if (DeleteColorList != null && DeleteColorList.Contains(color)) break;
                     Delete.Add(straight2);
                     DeleteType.Add(4);
@@ -304,6 +307,7 @@ public class Judgemanager : MonoBehaviour
     }
     IEnumerator BreakCoroutine(List<List<int>> Delete, List<int> DeleteType, List<int> DeleteColor, int[] GSIArray, GameObject[] GSArray, int[] GSBArray)
     {
+        
         float addscore = 0;
         for (int i = 0; i < Delete.Count; i++)
         {
@@ -333,6 +337,7 @@ public class Judgemanager : MonoBehaviour
             //}
             
             yield return new WaitForSeconds(delayTime);
+            soundManager.Destroy2Sound();
             for (int index = 0; index < GSIArray.Length; index++)
             {
                 addscore++;

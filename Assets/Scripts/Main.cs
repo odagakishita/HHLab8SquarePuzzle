@@ -205,7 +205,7 @@ public class Main : MonoBehaviour
                 else
                 {
 
-                    //soundManager.FalledSound();
+                    soundManager.FalledSound();
                     StartCoroutine(judgeManager.ScoreAnimation(4.0f, 0.2f));
                     //�w�L�T�S������t�F�[�Y��
                     gamePhase = 7;
@@ -297,6 +297,7 @@ public class Main : MonoBehaviour
                 else
                 {
                     //Debug.Log("�X�y�V����������");
+                    
                     StartCoroutine(DelayedGamePhase4(specialDelayTime * (Keseta - 1)));//add Keseta�͓���G�t�F�N�g�������ł����+1�ɐݒ肵�Ă���i�Ӗ��킩��Ȃ���������Ȃ����Ǔs���ǂ������j�̂ŁA-1�����Č����ҋ@���Ԃ�ݒ�
                     //Debug.Log("2");
                     gamePhase = 8;
