@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class ButtonAnimation : MonoBehaviour
 {
-    
+    new AudioSource audio;
+    public AudioClip openbutton;
     public Image choice1;
     public Image choice2;
     private Animator anim1;
     private Animator anim2;
     void Start()
     {
-        
+        audio = GetComponent<AudioSource>();
         anim1 = choice1.GetComponent<Animator>();
         anim2 = choice2.GetComponent<Animator>();
     }
@@ -21,6 +22,7 @@ public class ButtonAnimation : MonoBehaviour
     
     public void MouseEnter()
     {
+        audio.PlayOneShot(openbutton);
         anim1.SetBool("easymove",true);
         anim2.SetBool("hardmove", true);
         //Debug.Log("a");

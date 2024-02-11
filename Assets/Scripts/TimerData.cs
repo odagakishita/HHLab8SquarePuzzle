@@ -22,7 +22,7 @@ public class TimerData : MonoBehaviour
         CountTime -= Time.deltaTime;
         int minutes = Mathf.FloorToInt(CountTime / 60);
         int seconds = Mathf.FloorToInt(CountTime % 60);
-
+        if (CountTime < 11) uiFill.color = Color.red;
         uiFill.fillAmount = Mathf.InverseLerp(0, time, CountTime);
         uiText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
         if (CountTime < 1)

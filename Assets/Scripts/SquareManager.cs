@@ -33,7 +33,7 @@ public class SquareManager : MonoBehaviour
     [SerializeField]
     GameObject nextSquareParent;
 
-    Vector2 squareParentStartPoint = new Vector2(4.5f,12.64f);
+    Vector2 squareParentStartPoint = new Vector2(4.5f,12.5f);
     Vector2 nextSquareParentWaitPoint = new Vector2(-7.5f, 10f);
 
     public bool srot = true;
@@ -144,14 +144,18 @@ public class SquareManager : MonoBehaviour
     {
         sqRigidbody.velocity = holMoveSpeed * new Vector3(horizontalValue, 0, 0) + new Vector3(0, -virFallSpeed, 0) + new Vector3(0, -speedAdd, 0) + verMoveSpeed * new Vector3(0, virticalValue, 0);//’Ç‹L
 
-        
+        if (squareParent.transform.position.y > 13 * gridSphere.transform.lossyScale.y - gridSphere.transform.lossyScale.y / 2)
+        {
+            squareParent.transform.position = new Vector3(squareParent.transform.position.x, 13 * gridSphere.transform.lossyScale.y - gridSphere.transform.lossyScale.y / 2, transform.position.z);
+        }
 
 
-        if (squareParent.transform.position.x < -0.5f * gridSphere.transform.lossyScale.x / 2 )
+
+        if (squareParent.transform.position.x <gridSphere.transform.lossyScale.x / 2 )
         {
             squareParent.transform.position = new Vector3(gridSphere.transform.lossyScale.x / 2, squareParent.transform.position.y, transform.position.z);
         }
-        else if (squareParent.transform.position.x > 9 * gridSphere.transform.lossyScale.x + 0.5f)
+        else if (squareParent.transform.position.x > 9 * gridSphere.transform.lossyScale.x - gridSphere.transform.lossyScale.x / 2)
         {
             squareParent.transform.position = new Vector3(9 * gridSphere.transform.lossyScale.x - gridSphere.transform.lossyScale.x / 2, squareParent.transform.position.y, transform.position.z);
         }
