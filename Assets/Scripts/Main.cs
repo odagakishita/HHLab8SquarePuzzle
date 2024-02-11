@@ -205,7 +205,7 @@ public class Main : MonoBehaviour
                 else
                 {
 
-                    soundManager.FalledSound();
+                    //soundManager.FalledSound();
                     StartCoroutine(judgeManager.ScoreAnimation(4.0f, 0.2f));
                     //�w�L�T�S������t�F�[�Y��
                     gamePhase = 7;

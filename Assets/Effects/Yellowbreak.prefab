@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3191570042753364921}
   - component: {fileID: 7198095381275436495}
   m_Layer: 7
-  m_Name: 'Yellowbreak '
+  m_Name: Yellowbreak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
