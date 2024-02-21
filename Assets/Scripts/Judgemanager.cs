@@ -35,7 +35,7 @@ public class Judgemanager : MonoBehaviour
     List<int> DeleteType;
     List<int> DeleteColorList;
     public float delayTime;
-
+    public bool isbreakfinish;
     [NonSerialized] public int combo;
 
     // Start is called before the first frame update
@@ -76,6 +76,7 @@ public class Judgemanager : MonoBehaviour
     public int ShapeJudgement(int[] GSIArray, GameObject[] GSArray, int[] GSBArray)//物理挙動終了後のボール消しジャッジ
     {
         //add
+        isbreakfinish = false;
         Delete = new List<List<int>>();
         DeleteType = new List<int>();
         DeleteColorList = new List<int>();
@@ -325,45 +326,33 @@ public class Judgemanager : MonoBehaviour
         float addscore = 0;
         for (int i = 0; i < Delete.Count; i++)
         {
-            //switch (DeleteType[i])
-            //{
-            //    case 0:
-            //        effectManager.HexagonEffect(DeleteColor[i], GSArray, Delete[i][0]);
-            //        break;
-            //    case 1:
-            //        effectManager.PyramidEffect(DeleteColor[i], GSArray, Delete[i][0]);
-            //        break;
-            //    case 2:
-            //        effectManager.Pyramid2Effect(DeleteColor[i], GSArray, Delete[i][0]);
-            //        break;
-            //    case 3:
-            //        effectManager.StraightEffect(Delete[i], DeleteColor[i], GSArray);
-            //        break;
-            //    case 4:
-            //        effectManager.StraightEffect(Delete[i], DeleteColor[i], GSArray);
-            //        break;
-            //    case 5:
-            //        effectManager.StraightEffect(Delete[i], DeleteColor[i], GSArray);
-            //        break;
-            //    default:
-            //        Debug.Log("もう消せるものはない");
-            //        break;
-            //}
-            
+           
             yield return new WaitForSeconds(delayTime);
-            soundManager.Destroy2Sound();
+            //soundManager.Destroy2Sound();
             combo++;
             //combopoint.text = combo.ToString();
             for (int index = 0; index < GSIArray.Length; index++)
             {
                 addscore++;
                 if (GSIArray[index] != DeleteColor[i]) continue;
+                for(int j = 0; j < 4; j++)
+                {
+                    yield return null;
+                }
+                
+                soundManager.DestroySound();
                 breakManager.NormalBreak(index, GSIArray, GSArray, GSBArray);
+                
             }
             
         }
 
         StartCoroutine(ScoreAnimation(addscore, scoreuptime));
+        for (int j = 0; j < 10; j++)
+        {
+            yield return null;
+        }
+        isbreakfinish = true;
 
 
     }

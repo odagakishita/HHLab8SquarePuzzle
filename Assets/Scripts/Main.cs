@@ -124,7 +124,7 @@ public class Main : MonoBehaviour
                 //��������t�F�[�Y
                 squareManager.SquareMove(playerInput.MoveKeyInput(), holizontalMoveSpeed, virticalFallSpeed, 0f, gridObjectManager.GridSquare, verticalMoveSpeed, playerInput.RotateKeyInput());
                 //sphereManager.SphereRotate(playerInput.RotateKeyInput(), 100);
-                if (Input.GetKeyDown(KeyCode.R) && squareManager.srot == true)//add
+                if (Input.GetKeyDown(KeyCode.E) && squareManager.srot == true)//add
                 {
                     squareManager.srot = false;
                     StartCoroutine(squareManager.Rotate(rotateSpeed, 1f));
@@ -290,6 +290,16 @@ public class Main : MonoBehaviour
                 }
                 else if (Keseta == 1)
                 {
+                    for (int n = 0; n < gridObserver.gameSquareInfoArray.Length; n++)
+                    {
+
+                        if (gridObserver.gameSquareInfoArray[n] < 1)
+                        {
+                            continue;
+                        }
+
+                        squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
+                    }
                     //�ēx���������
                     //Debug.Log("1");
                     StartCoroutine(DelayedGamePhase4(delayTime));
@@ -299,20 +309,38 @@ public class Main : MonoBehaviour
                 }
                 else
                 {
+                    for (int n = 0; n < gridObserver.gameSquareInfoArray.Length; n++)
+                    {
+
+                        if (gridObserver.gameSquareInfoArray[n] < 1)
+                        {
+                            continue;
+                        }
+
+                        squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
+                    }
                     //Debug.Log("�X�y�V����������");
-                    
-                    StartCoroutine(DelayedGamePhase4(specialDelayTime * (Keseta - 1)));//add Keseta�͓���G�t�F�N�g�������ł����+1�ɐݒ肵�Ă���i�Ӗ��킩��Ȃ���������Ȃ����Ǔs���ǂ������j�̂ŁA-1�����Č����ҋ@���Ԃ�ݒ�
+
+                    //StartCoroutine(DelayedGamePhase4(specialDelayTime * (Keseta - 1)));//add Keseta�͓���G�t�F�N�g�������ł����+1�ɐݒ肵�Ă���i�Ӗ��킩��Ȃ���������Ȃ����Ǔs���ǂ������j�̂ŁA-1�����Č����ҋ@���Ԃ�ݒ�
                     //Debug.Log("2");
-                    gamePhase = 8;
+                    gamePhase = 10;
                 }
 
                 //gamePhase = 1;
                 break;
             case 8:
+                
                 break;
             case 9:
                 //ゲームオーバー時にここに入る
                 SendMessage("SoloSceneMovetoResult");
+                break;
+            case 10:
+                if (judgeManager.isbreakfinish)
+                {
+                    pastDelete = true;
+                    gamePhase = 4;
+                }
                 break;
             default:
                 break;
@@ -322,9 +350,11 @@ public class Main : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        // �x����̏���
+        
         pastDelete = true;
         gamePhase = 4;
+       
+        
         //Debug.Log("1.5");
     }
     void FallMethodAll(int number)

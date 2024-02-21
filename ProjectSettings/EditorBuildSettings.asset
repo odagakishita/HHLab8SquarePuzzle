@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainEasyMode.unity
     guid: 8e86182e16d9b5e45a27a56b93cbd658
+  - enabled: 1
+    path: Assets/Scenes/result2.unity
+    guid: 762c1e9d54cf3af43a00f7b2312569b3
   m_configObjects: {}

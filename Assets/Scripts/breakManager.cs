@@ -9,7 +9,7 @@ public class breakManager : MonoBehaviour
     {
         //Debug.Log("hogehoge");
         GameObject instance = Instantiate(break_Effect[GSIArray[ballIndex]], GSArray[ballIndex].transform.position, Quaternion.identity);
-        Destroy(instance,0.4f);
+        
         Destroy(GSArray[ballIndex]);
         GSIArray[ballIndex] = 0;
         GSBArray[ballIndex] = 0;

@@ -31,8 +31,13 @@ public class MultipleSceneManager : MonoBehaviour
         if (button.choice1click) SceneManager.LoadScene("Main");
         else if(SceneManager.GetActiveScene().name == "result")
         {
-            if(SquareManager.ballnumbers ==4) SceneManager.LoadScene("MainEasyMode");
-            else if (SquareManager.ballnumbers ==5) SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("MainEasyMode");
+            
+        }
+        else if (SceneManager.GetActiveScene().name == "result2")
+        {
+            SceneManager.LoadScene("Main");
+
         }
         //result.ButtonSound();
 
@@ -48,8 +53,9 @@ public class MultipleSceneManager : MonoBehaviour
 
     public void SoloSceneMovetoResult()
     {
-        SceneManager.LoadScene("result");
-       // result.ButtonSound();
+        if(SquareManager.ballnumbers == 4) SceneManager.LoadScene("result");
+        else SceneManager.LoadScene("result2");
+        // result.ButtonSound();
     }
 
 
