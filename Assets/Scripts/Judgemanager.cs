@@ -28,7 +28,7 @@ public class Judgemanager : MonoBehaviour
 
     GameObject[] GridObjectArray = new GameObject[100];
     int[] GridIntArray = new int[100];
-    int[] surrounds = new int[] { 10,  1, -1,  -10 };//接触しているボールのとの差分
+    int[] surrounds = new int[] { 11,10,9,  1, -1,-9,  -10 ,-11};//接触しているボールのとの差分
     int sameballs = 0;
     int specialnumber;
     List<List<int>> Delete;
