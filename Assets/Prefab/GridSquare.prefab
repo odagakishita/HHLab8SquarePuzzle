@@ -88,16 +88,32 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8245043785726966313, guid: 0e6b11ecfbac1104b95d1983aece7e6f, type: 3}
       propertyPath: m_Size.x
-      value: 0.984375
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 8245043785726966313, guid: 0e6b11ecfbac1104b95d1983aece7e6f, type: 3}
       propertyPath: m_Size.y
-      value: 0.984375
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 8245043785726966313, guid: 0e6b11ecfbac1104b95d1983aece7e6f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
+      objectReference: {fileID: -5177388603050735206, guid: cc35afd292fc349128b36a291fb3a165, type: 3}
+    - target: {fileID: 8245043785726966313, guid: 0e6b11ecfbac1104b95d1983aece7e6f, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245043785726966313, guid: 0e6b11ecfbac1104b95d1983aece7e6f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245043785726966313, guid: 0e6b11ecfbac1104b95d1983aece7e6f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245043785726966313, guid: 0e6b11ecfbac1104b95d1983aece7e6f, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8245043785726966313, guid: 0e6b11ecfbac1104b95d1983aece7e6f, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

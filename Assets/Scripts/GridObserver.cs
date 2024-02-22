@@ -40,6 +40,8 @@ public class GridObserver : MonoBehaviour
         List<int> nowSquaresNum = new List<int>();
         foreach (GameObject sphere in squareList)
         {
+            BoxCollider2D cube_boxCol = sphere.GetComponent<BoxCollider2D>();
+            cube_boxCol.enabled = true;
             Vector2 size = new Vector2(squareRadius,squareRadius);
             //print("sphere");
             Collider2D[] targetsInSphere = Physics2D.OverlapBoxAll(sphere.transform.position, size, 0f, gridMask);

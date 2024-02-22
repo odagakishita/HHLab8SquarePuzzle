@@ -38,6 +38,27 @@ public class SquareManager : MonoBehaviour
 
     public bool srot = true;
 
+    public float Raycast2D(LayerMask layerMask)
+    {
+        Vector2 LeftRay = new Vector2(squareParent.transform.position.x - 0.5f, squareParent.transform.position.y - 1);
+        Vector2 RightRay = new Vector2(squareParent.transform.position.x + 0.5f , squareParent.transform.position.y - 1);
+        //Debug.Log(LeftRay);
+        RaycastHit2D LeftHitObject = Physics2D.Raycast(LeftRay, Vector2.down, 13,layerMask);
+        RaycastHit2D RightHitObject = Physics2D.Raycast(RightRay, Vector2.down, 13, layerMask);
+
+        float LeftDepth = LeftHitObject.distance;
+        float RightDepth = RightHitObject.distance;
+
+        float Depth = Mathf.Min(LeftDepth, RightDepth);
+        //Debug.Log(Depth);
+        return Depth;
+    }
+
+    public void SquareDrop(float drop)
+    {
+        squareParent.transform.position = new Vector2(squareParent.transform.position.x, squareParent.transform.position.y - drop);
+    }
+
     public void zeroRigid()
     {
         sqRigidbody.velocity = Vector2.zero;
@@ -134,7 +155,7 @@ public class SquareManager : MonoBehaviour
             GameObject instance = Instantiate(squareObjectArray[colorArray[i]],
                 pos + new Vector2(normalVec.x * cosTheta - normalVec.y * sinTheta, normalVec.x * sinTheta + normalVec.y * cosTheta),
                 Quaternion.identity);
-
+            instance.GetComponent<BoxCollider2D>().enabled = false;
             instance.transform.SetParent(parent.transform);
             squareArray[i] = instance;
         }

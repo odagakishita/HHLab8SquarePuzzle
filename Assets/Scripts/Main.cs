@@ -17,6 +17,8 @@ public class Main : MonoBehaviour
     [SerializeField]
     SoundManager soundManager;
 
+    //[SerializeField]
+    //ParentCollision parentCollision;
 
     [SerializeField]
     SquareManager squareManager;
@@ -59,6 +61,8 @@ public class Main : MonoBehaviour
     [SerializeField] private float CountTime = 10;
 
     LayerMask gridMask = 1 << 6;
+
+    LayerMask objectMask = 1 << 7;
 
     public float rotateSpeed;//add
 
@@ -117,10 +121,12 @@ public class Main : MonoBehaviour
                 //judgeManager.ComboInit();
                 squareManager.nowSquareInit();
                 squareManager.nextSquareInit();
+               // parentCollision.ParentInit();
 
                 gamePhase = 2;
                 break;
             case 2:
+                
                 //��������t�F�[�Y
                 squareManager.SquareMove(playerInput.MoveKeyInput(), holizontalMoveSpeed, virticalFallSpeed, 0f, gridObjectManager.GridSquare, verticalMoveSpeed, playerInput.RotateKeyInput());
                 //sphereManager.SphereRotate(playerInput.RotateKeyInput(), 100);
@@ -135,11 +141,19 @@ public class Main : MonoBehaviour
                     StartCoroutine(squareManager.Rotate(rotateSpeed, -1f));
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space))
+                else if (squareManager.Raycast2D(objectMask) < 0.1f && squareManager.Raycast2D(objectMask) != 0f)
                 {
 
                     
                     //Debug.Log("spaceぼたんをクリックしてる" + gamePhase);
+                    gamePhase = 3;
+                }
+                else if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    //Debug.Log(squareManager.squareParent.transform.rotation.z);
+                    if (squareManager.squareParent.transform.rotation.z % 90 > 1) return;
+                    float drop = squareManager.Raycast2D(objectMask);
+                    squareManager.SquareDrop(drop);
                     gamePhase = 3;
                 }
 
@@ -163,7 +177,7 @@ public class Main : MonoBehaviour
                     {
                         continue;
                     }
-                    
+                    //squareManager.gameSquareArray[n].transform.rotation = Quaternion.identity;
                     squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                     
                     //debugManager.InfoTextRegistration(n, debugManager.InfoDebugTextArray, gridObserver.gameSquareInfoArray);
@@ -273,8 +287,9 @@ public class Main : MonoBehaviour
                         {
                             continue;
                         }
-
+                        //squareManager.gameSquareArray[n].transform.rotation = Quaternion.identity;
                         squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
+                        
                     }
                     for (int i = 120; i < 140; i++)
                     {
@@ -297,7 +312,7 @@ public class Main : MonoBehaviour
                         {
                             continue;
                         }
-
+                        //squareManager.gameSquareArray[n].transform.rotation = Quaternion.identity;
                         squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                     }
                     //�ēx���������

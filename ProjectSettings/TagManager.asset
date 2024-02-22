@@ -9,11 +9,12 @@ TagManager:
   - Blue
   - Purple
   - Yellow
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Frames
   - Water
   - UI
   - Balledge
@@ -43,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: asi
+    uniqueID: 2175917351
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
