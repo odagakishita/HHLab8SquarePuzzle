@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridObjectManager : MonoBehaviour
 {
     [System.NonSerialized]
-    public GameObject[] gridObjectArray = new GameObject[140];
+    public GameObject[] gridObjectArray = new GameObject[168];
 
     [SerializeField]
     public GameObject GridSquare;
@@ -18,22 +18,13 @@ public class GridObjectManager : MonoBehaviour
         int gridNumber = 0;
         for (int i = 0; i < 14; i++)
         {
-            if (i % 2 == 0)
-            {
-                for (int m = 0; m < 10; m++)
+            
+                for (int m = 0; m < 12; m++)
                 {
                     GridObjectInstantiate(l, 0, i, m, gridNumber);
                     gridNumber++;
                 }
-            }
-            else
-            {
-                for (int n = 0; n < 10; n++)
-                {
-                    GridObjectInstantiate(l, 0, i, n, gridNumber);
-                    gridNumber++;
-                }
-            }
+            
         }
     }
 

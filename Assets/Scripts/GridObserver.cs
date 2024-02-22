@@ -8,11 +8,11 @@ public class GridObserver : MonoBehaviour
     // Start is called before the first frame update
     [System.NonSerialized]
     //現在のグリッドの様子が数字で入っている配列
-    public int[] gameSquareInfoArray = new int[140];
+    public int[] gameSquareInfoArray = new int[168];
 
     [System.NonSerialized]
     //オブジェクトの落下可能性が0~2で入っている配列
-    public int[] gameSquareBoolArray = new int[140];
+    public int[] gameSquareBoolArray = new int[168];
 
     //GameObject[] ObjectCheckArray = new GameObject[3];
     //落下するボールを管理（アニメーションをかけるボールを管理)
@@ -140,7 +140,7 @@ public class GridObserver : MonoBehaviour
 
         if (
             //最下層
-            number < 10
+            number < 12
             ////右端でbにボールがある
             //|| (number % 19 == 9 && GSBArray[number - 10] > 1)
             ////左端でcにボールがある場合
@@ -152,7 +152,7 @@ public class GridObserver : MonoBehaviour
         {
             GSBArray[number] = 2;
         }
-        else if (GSBArray[number - 10] > 1)
+        else if (GSBArray[number - 12] > 1)
         {
             GSBArray[number] = 2;
         }
@@ -236,9 +236,9 @@ public class GridObserver : MonoBehaviour
         int returnNum;
         
         //直下にボールがない
-        if (GSIArray[number - 10] < 1)
+        if (GSIArray[number - 12] < 1)
         {
-            returnNum = number - 10;
+            returnNum = number - 12;
         }
         
         //両方にボールがある

@@ -84,12 +84,7 @@ public class Main : MonoBehaviour
     void Start()
     {
         //combo = 0;
-        if (SceneManager.GetActiveScene().name == "MainEasyMode")
-        {
-
-            SquareManager.ballnumbers = 4;
-        }
-        else SquareManager.ballnumbers = 5;
+        SquareManager.ballnumbers = 5;
         judgeManager.ScoreInit();
         soundManager.AudioInit();
         gridObjectManager.GridInit();
@@ -141,17 +136,17 @@ public class Main : MonoBehaviour
                     StartCoroutine(squareManager.Rotate(rotateSpeed, -1f));
                 }
 
-                else if (squareManager.Raycast2D(objectMask) < 0.1f && squareManager.Raycast2D(objectMask) != 0f)
+                else if (squareManager.Raycast2D(objectMask) < 0.1f && squareManager.Raycast2D(objectMask) != 0f )
                 {
 
                     
                     //Debug.Log("spaceぼたんをクリックしてる" + gamePhase);
                     gamePhase = 3;
                 }
-                else if (Input.GetKeyDown(KeyCode.Space))
+                else if (Input.GetKeyDown(KeyCode.Space) && squareManager.srot == true)
                 {
                     //Debug.Log(squareManager.squareParent.transform.rotation.z);
-                    if (squareManager.squareParent.transform.rotation.z % 90 > 1) return;
+                    //if (Mathf.Abs(squareManager.squareParent.transform.rotation.z % 90)> 1) return;
                     float drop = squareManager.Raycast2D(objectMask);
                     squareManager.SquareDrop(drop);
                     gamePhase = 3;

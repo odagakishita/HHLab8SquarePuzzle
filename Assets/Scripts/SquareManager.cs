@@ -10,7 +10,7 @@ public class SquareManager : MonoBehaviour
     public GameObject[] nowSquareArray = new GameObject[4];
 
     [System.NonSerialized]
-    public GameObject[] gameSquareArray = new GameObject[140];
+    public GameObject[] gameSquareArray = new GameObject[168];
 
     GameObject[] nextSquareArray = new GameObject[4];
 
@@ -176,9 +176,9 @@ public class SquareManager : MonoBehaviour
         {
             squareParent.transform.position = new Vector3(gridSphere.transform.lossyScale.x / 2, squareParent.transform.position.y, transform.position.z);
         }
-        else if (squareParent.transform.position.x > 9 * gridSphere.transform.lossyScale.x - gridSphere.transform.lossyScale.x / 2)
+        else if (squareParent.transform.position.x > 11 * gridSphere.transform.lossyScale.x - gridSphere.transform.lossyScale.x / 2)
         {
-            squareParent.transform.position = new Vector3(9 * gridSphere.transform.lossyScale.x - gridSphere.transform.lossyScale.x / 2, squareParent.transform.position.y, transform.position.z);
+            squareParent.transform.position = new Vector3(11 * gridSphere.transform.lossyScale.x - gridSphere.transform.lossyScale.x / 2, squareParent.transform.position.y, transform.position.z);
         }
     }
 

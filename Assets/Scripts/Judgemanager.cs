@@ -26,9 +26,8 @@ public class Judgemanager : MonoBehaviour
     [SerializeField]
     SoundManager soundManager;
 
-    GameObject[] GridObjectArray = new GameObject[100];
-    int[] GridIntArray = new int[100];
-    int[] surrounds = new int[] { 10,  1, -1,  -10 };//接触しているボールのとの差分
+    
+    int[] surrounds = new int[] {13, 12,11,  1, -1,-11,  -12 ,-13};//接触しているボールのとの差分
     int sameballs = 0;
     int specialnumber;
     List<List<int>> Delete;
@@ -159,16 +158,16 @@ public class Judgemanager : MonoBehaviour
             if (newIndex < 0 || newIndex >= GSIArray.Length) continue;
             if (processed[newIndex]) continue;
             if (GSIArray[index] != GSIArray[newIndex]) continue;
-            switch (index % 10)
+            switch (index % 12)
             {
                 case 0:
-                    if (newIndex == index - 1 || newIndex == index - 11 || newIndex == index + 9) continue;
+                    if (newIndex == index - 1 || newIndex == index - 13 || newIndex == index + 11) continue;
                     break;
                 //case 10:
                 //    if (newIndex == index - 1) continue;
                 //    break;
-                case 9:
-                    if (newIndex == index + 1 || newIndex == index + 11 || newIndex == index - 9) continue;
+                case 11:
+                    if (newIndex == index + 1 || newIndex == index + 13 || newIndex == index - 11) continue;
                     break;
                 //case 18:
                 //    if (newIndex == index + 1) continue;
@@ -187,7 +186,7 @@ public class Judgemanager : MonoBehaviour
         {
             for (int j = 0; j < Data[i].Count; j++)
             {
-                List<int> hexagon = new List<int> { Data[i][j], Data[i][j] + 1, Data[i][j] + 2, Data[i][j] + 12, Data[i][j] + 22, Data[i][j] + 21, Data[i][j] + 20, Data[i][j] + 10 };
+                List<int> hexagon = new List<int> { Data[i][j], Data[i][j] + 1, Data[i][j] + 2, Data[i][j] + 14, Data[i][j] + 26, Data[i][j] + 25, Data[i][j] + 24, Data[i][j] + 12 };
                 bool result = hexagon.All(item => Data[i].Contains(item));
 
                 if (!result) continue;
@@ -222,12 +221,14 @@ public class Judgemanager : MonoBehaviour
             for (int j = 0; j < Data[i].Count; j++)
             {
                 List<int> straight = new List<int> { Data[i][j], Data[i][j] + 1, Data[i][j] + 2, Data[i][j] + 3, Data[i][j] + 4, Data[i][j] + 5, Data[i][j] + 6, Data[i][j] + 7 };
-                List<int> straight2 = new List<int> { Data[i][j], Data[i][j] + 10, Data[i][j] + 20, Data[i][j] + 30, Data[i][j] + 40, Data[i][j] + 50, Data[i][j] + 60, Data[i][j] + 70 };
-               // List<int> straight3 = new List<int> { Data[i][j], Data[i][j] + 9, Data[i][j] + 18, Data[i][j] + 27, Data[i][j] + 36, Data[i][j] + 45 };
-
+                List<int> straight2 = new List<int> { Data[i][j], Data[i][j] + 12, Data[i][j] + 24, Data[i][j] + 36, Data[i][j] + 48, Data[i][j] + 60, Data[i][j] + 72, Data[i][j] + 84 };
+                List<int> straight3 = new List<int> { Data[i][j], Data[i][j] + 11, Data[i][j] + 22, Data[i][j] + 33, Data[i][j] + 44, Data[i][j] + 55, Data[i][j] + 66, Data[i][j] + 77 };
+                List<int> straight4 = new List<int> { Data[i][j], Data[i][j] + 13, Data[i][j] + 26, Data[i][j] + 39, Data[i][j] + 52, Data[i][j] + 65, Data[i][j] + 78, Data[i][j] + 91 };
                 bool result = straight.All(item => Data[i].Contains(item));
                 bool result2 = straight2.All(item => Data[i].Contains(item));
-                //bool result3 = straight3.All(item => Data[i].Contains(item));
+                bool result3 = straight3.All(item => Data[i].Contains(item));
+                bool result4 = straight4.All(item => Data[i].Contains(item));
+
 
                 if (result)
                 {
@@ -263,9 +264,9 @@ public class Judgemanager : MonoBehaviour
                     for (int k = 8; k < 10; k++)
                     {
 
-                        if (Data[i].Contains(Data[i][j] + k * 10))
+                        if (Data[i].Contains(Data[i][j] + k * 12))
                         {
-                            straight2.Add(Data[i][j] + k * 10);
+                            straight2.Add(Data[i][j] + k * 12);
 
                         }
                         else break;
@@ -287,35 +288,48 @@ public class Judgemanager : MonoBehaviour
                     //DeleteColor(GSIArray, color, GSArray, GSBArray);
                     //specialnumber++;
                 }
-                //else if (result3)
-                //{
-                //    color = GSIArray[Data[i][j]];
-                //    for (int k = 6; k < 10; k++)
-                //    {
+                else if (result3)
+                {
+                    color = GSIArray[Data[i][j]];
+                    for (int k = 8; k < 10; k++)
+                    {
 
-                //        if (Data[i].Contains(Data[i][j] + k * 9))
-                //        {
-                //            straight3.Add(Data[i][j] + k * 9);
+                        if (Data[i].Contains(Data[i][j] + k * 11))
+                        {
+                            straight3.Add(Data[i][j] + k * 11);
 
-                //        }
-                //        else break;
-                //    }
-                //    //foreach (int index in straight3)
-                //    //{
-                //    //    Destroy(GSArray[index]);
-                //    //    GSIArray[index] = 0;
-                //    //    GSBArray[index] = 0;
-                //    //}
-                //    Debug.Log("ストレイト3　消える色：" + color);
-                //    if (DeleteColorList != null && DeleteColorList.Contains(color)) break;
-                //    Delete.Add(straight3);
-                //    DeleteType.Add(5);
-                //    DeleteColorList.Add(color);
-                //    specialnumber++;
-                //    //DeleteColor(GSIArray, color, GSArray, GSBArray);
-                //    //specialnumber++;
+                        }
+                        else break;
+                    }
+                   
+                    if (DeleteColorList != null && DeleteColorList.Contains(color)) break;
+                    Delete.Add(straight3);
+                    DeleteType.Add(5);
+                    DeleteColorList.Add(color);
+                    specialnumber++;
+                    
+                }
+                else if (result4)
+                {
+                    color = GSIArray[Data[i][j]];
+                    for (int k = 8; k < 10; k++)
+                    {
 
-                //}
+                        if (Data[i].Contains(Data[i][j] + k * 13))
+                        {
+                            straight4.Add(Data[i][j] + k * 13);
+
+                        }
+                        else break;
+                    }
+
+                    if (DeleteColorList != null && DeleteColorList.Contains(color)) break;
+                    Delete.Add(straight4);
+                    DeleteType.Add(6);
+                    DeleteColorList.Add(color);
+                    specialnumber++;
+
+                }
 
             }
         }
