@@ -286,7 +286,7 @@ public class Main : MonoBehaviour
                         squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                         
                     }
-                    for (int i = 120; i < 140; i++)
+                    for (int i = 144; i < 168; i++)
                     {
                         if (gridObserver.gameSquareBoolArray[i] != 2)
                         {
