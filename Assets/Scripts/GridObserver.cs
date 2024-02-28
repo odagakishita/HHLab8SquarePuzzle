@@ -8,11 +8,11 @@ public class GridObserver : MonoBehaviour
     // Start is called before the first frame update
     [System.NonSerialized]
     //現在のグリッドの様子が数字で入っている配列
-    public int[] gameSquareInfoArray = new int[168];
+    public int[] gameSquareInfoArray = new int[180];
 
     [System.NonSerialized]
     //オブジェクトの落下可能性が0~2で入っている配列
-    public int[] gameSquareBoolArray = new int[168];
+    public int[] gameSquareBoolArray = new int[180];
 
     //GameObject[] ObjectCheckArray = new GameObject[3];
     //落下するボールを管理（アニメーションをかけるボールを管理)

@@ -16,6 +16,8 @@ public class Main : MonoBehaviour
 
     [SerializeField]
     SoundManager soundManager;
+    [SerializeField]
+    UserInterfaceManager UIManager;
 
     //[SerializeField]
     //ParentCollision parentCollision;
@@ -72,6 +74,10 @@ public class Main : MonoBehaviour
 
     float time;
 
+   // [SerializeField] public GameObject fallEffect;
+
+    //public Material material;
+
     //int combo;
 
     //squareManager.startInit();
@@ -83,10 +89,10 @@ public class Main : MonoBehaviour
     }
     void Start()
     {
-        //combo = 0;
+        UIManager.IsGameStop = false;
         SquareManager.ballnumbers = 5;
         judgeManager.ScoreInit();
-        soundManager.AudioInit();
+        //soundManager.AudioInit();
         gridObjectManager.GridInit();
         squareManager.startInit();
         //debugManager.DebugTextInit(gridObjectManager.GridSquare, debugManager.tmpTemplate, debugManager.InfoDebugTextArray, debugManager.DebugTextParent);
@@ -99,13 +105,9 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
+        //material.SetFloat("_UnScaledTime", Time.unscaledTime);
 
 
-        //    Debug.Log(gamePhase);
-        //    //gamePhase = 3;
-        //}
         float timer = CountTime;
         CountTime = timerData.TimeCount(uiFill,uiText,timer,time);
         switch (gamePhase)
@@ -218,6 +220,10 @@ public class Main : MonoBehaviour
                 {
 
                     soundManager.FalledSound();
+
+                    //Vector2 effectPos = new Vector2(squareManager.squareParent.transform.position.x -1f, squareManager.squareParent.transform.position.y);
+                    //Instantiate(fallEffect, effectPos, Quaternion.identity);
+
                     StartCoroutine(judgeManager.ScoreAnimation(4.0f, 0.2f));
                     //�w�L�T�S������t�F�[�Y��
                     gamePhase = 7;
@@ -286,7 +292,7 @@ public class Main : MonoBehaviour
                         squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                         
                     }
-                    for (int i = 144; i < 168; i++)
+                    for (int i = 156; i < 180; i++)
                     {
                         if (gridObserver.gameSquareBoolArray[i] != 2)
                         {

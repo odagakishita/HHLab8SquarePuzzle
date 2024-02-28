@@ -337,13 +337,38 @@ public class Judgemanager : MonoBehaviour
     IEnumerator BreakCoroutine(List<List<int>> Delete, List<int> DeleteType, List<int> DeleteColor, int[] GSIArray, GameObject[] GSArray, int[] GSBArray)
     {
         
+
+
         float addscore = 0;
         for (int i = 0; i < Delete.Count; i++)
         {
-           
+            switch (DeleteType[i])
+            {
+                case 0:
+                    breakManager.SquareEffect(DeleteColor[i], GSArray, Delete[i][0]);
+                    break;
+                case 3:
+                    breakManager.StraightEffect(Delete[i], DeleteColor[i], GSArray);
+                    break;
+                case 4:
+                    breakManager.StraightEffect(Delete[i], DeleteColor[i], GSArray);
+                    break;
+                case 5:
+                    breakManager.StraightEffect(Delete[i], DeleteColor[i], GSArray);
+                    break;
+                case 6:
+                    breakManager.StraightEffect(Delete[i], DeleteColor[i], GSArray);
+                    break;
+                default:
+                    //Debug.Log("‚à‚¤Á‚¹‚é‚à‚Ì‚Í‚È‚¢");
+                    break;
+            }
+            soundManager.LightSound();
+            
             yield return new WaitForSeconds(delayTime);
             //soundManager.Destroy2Sound();
             combo++;
+            
             //combopoint.text = combo.ToString();
             for (int index = 0; index < GSIArray.Length; index++)
             {
@@ -354,10 +379,11 @@ public class Judgemanager : MonoBehaviour
                     yield return null;
                 }
                 
-                soundManager.DestroySound();
+                soundManager.Destroy2Sound();
                 breakManager.NormalBreak(index, GSIArray, GSArray, GSBArray);
                 
             }
+            breakManager.positionzero();
             
         }
 

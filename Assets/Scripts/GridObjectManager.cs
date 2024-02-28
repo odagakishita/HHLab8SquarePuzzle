@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridObjectManager : MonoBehaviour
 {
     [System.NonSerialized]
-    public GameObject[] gridObjectArray = new GameObject[168];
+    public GameObject[] gridObjectArray = new GameObject[180];
 
     [SerializeField]
     public GameObject GridSquare;
@@ -16,7 +16,7 @@ public class GridObjectManager : MonoBehaviour
         float l = shpereScale.x;
 
         int gridNumber = 0;
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 15; i++)
         {
             
                 for (int m = 0; m < 12; m++)
