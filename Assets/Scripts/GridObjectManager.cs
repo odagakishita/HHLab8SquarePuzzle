@@ -5,21 +5,26 @@ using UnityEngine;
 public class GridObjectManager : MonoBehaviour
 {
     [System.NonSerialized]
-    public GameObject[] gridObjectArray = new GameObject[180];
+    public GameObject[] gridObjectArray;
 
     [SerializeField]
     public GameObject GridSquare;
     // Start is called before the first frame update
-    public void GridInit()
+    public void GridAwake(int squarenumbers)
     {
+        gridObjectArray = new GameObject[squarenumbers];
+    }
+    public void GridInit( int horizontal, int vertical)
+    {
+        
         Vector3 shpereScale = GridSquare.transform.lossyScale;
         float l = shpereScale.x;
 
         int gridNumber = 0;
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < vertical; i++)
         {
             
-                for (int m = 0; m < 12; m++)
+                for (int m = 0; m < horizontal; m++)
                 {
                     GridObjectInstantiate(l, 0, i, m, gridNumber);
                     gridNumber++;

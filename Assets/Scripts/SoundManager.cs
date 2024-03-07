@@ -13,40 +13,47 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
     [SerializeField] AudioSource bgmAudioSource;
+    [SerializeField] AudioSource seAudioSource;
     //[SerializeField] AudioSource seAudioSource;
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    //void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 
     public void SetBGMVolume(float volume)
     {
         bgmAudioSource.volume = volume;
     }
 
+    public void SetSEVolume(float volume)
+    {
+        
+        seAudioSource.volume = volume;
+    }
+
     public void LightSound()
     {
-        bgmAudioSource.PlayOneShot(lightsound, 1.0f);
+        seAudioSource.PlayOneShot(lightsound, 1.0f);
     }
 
     public void DestroySound()
     {
-        bgmAudioSource.PlayOneShot(destroysound,0.7f);
+        seAudioSource.PlayOneShot(destroysound,0.7f);
     }
     public void Destroy2Sound()
     {
-        bgmAudioSource.PlayOneShot(destroy2sound, 0.7f);
+        seAudioSource.PlayOneShot(destroy2sound, 0.7f);
     }
     public void FalledSound()
     {
-        bgmAudioSource.PlayOneShot(falledsound);
+        seAudioSource.PlayOneShot(falledsound);
     }
 }

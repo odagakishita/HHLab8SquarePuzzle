@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
+    public int horizontalBallNumbers = 20;
+    public int verticalBallNumbers = 20;
     //public float fallTime = 1f;
     //public float previousTime;
     //public Vector3 rotationPoint;
@@ -34,8 +36,7 @@ public class Main : MonoBehaviour
     [SerializeField]
     GridObserver gridObserver;
 
-    [SerializeField]
-    Debugmanager debugManager;
+    
 
     [SerializeField]
     Judgemanager judgeManager;
@@ -74,31 +75,32 @@ public class Main : MonoBehaviour
 
     float time;
 
-   // [SerializeField] public GameObject fallEffect;
-
-    //public Material material;
-
-    //int combo;
-
-    //squareManager.startInit();
+    
     private void Awake()
     {
-        time = CountTime;
-        timerData.TimeInit(uiFill, uiText, CountTime,time);
-        
+        judgeManager.JudgeAwake(horizontalBallNumbers, verticalBallNumbers);
+        gridObserver.ArrayAwake(horizontalBallNumbers * verticalBallNumbers);
+        squareManager.squareAwake(horizontalBallNumbers * verticalBallNumbers);
+        gridObjectManager.GridAwake(horizontalBallNumbers * verticalBallNumbers);
+
     }
+
     void Start()
     {
-        UIManager.IsGameStop = false;
-        SquareManager.ballnumbers = 5;
-        judgeManager.ScoreInit();
-        //soundManager.AudioInit();
-        gridObjectManager.GridInit();
         squareManager.startInit();
-        //debugManager.DebugTextInit(gridObjectManager.GridSquare, debugManager.tmpTemplate, debugManager.InfoDebugTextArray, debugManager.DebugTextParent);
+        time = CountTime;
+        timerData.TimeInit(uiText, CountTime, time);
+        gridObjectManager.GridInit(horizontalBallNumbers, verticalBallNumbers);
+
+        
 
         gridObserver.ArrayInfoInit(gridObserver.gameSquareInfoArray);
         gridObserver.ArrayBoolInfoInit(gridObserver.gameSquareBoolArray);
+        UIManager.IsGameStop = false;
+        SquareManager.ballnumbers = 4;
+        judgeManager.ScoreInit();
+        //soundManager.AudioInit();
+        
         gamePhase = 1;
     }
 
@@ -109,11 +111,11 @@ public class Main : MonoBehaviour
 
 
         float timer = CountTime;
-        CountTime = timerData.TimeCount(uiFill,uiText,timer,time);
+        CountTime = timerData.TimeCount(uiText,timer,time);
         switch (gamePhase)
         {
             case 1:
-               // combo = 0;
+                judgeManager.combo = 0;
                 squareManager.squareParentInit();
                 //judgeManager.ComboInit();
                 squareManager.nowSquareInit();
@@ -124,9 +126,9 @@ public class Main : MonoBehaviour
                 break;
             case 2:
                 
-                //��������t�F�[�Y
-                squareManager.SquareMove(playerInput.MoveKeyInput(), holizontalMoveSpeed, virticalFallSpeed, 0f, gridObjectManager.GridSquare, verticalMoveSpeed, playerInput.RotateKeyInput());
-                //sphereManager.SphereRotate(playerInput.RotateKeyInput(), 100);
+                
+                squareManager.SquareMove(playerInput.MoveKeyInput(), holizontalMoveSpeed, virticalFallSpeed, 0f, gridObjectManager.GridSquare, verticalMoveSpeed, playerInput.RotateKeyInput(), horizontalBallNumbers,verticalBallNumbers);
+                
                 if (Input.GetKeyDown(KeyCode.E) && squareManager.srot == true)//add
                 {
                     squareManager.srot = false;
@@ -147,21 +149,13 @@ public class Main : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Space) && squareManager.srot == true)
                 {
-                    //Debug.Log(squareManager.squareParent.transform.rotation.z);
-                    //if (Mathf.Abs(squareManager.squareParent.transform.rotation.z % 90)> 1) return;
+                   
                     float drop = squareManager.Raycast2D(objectMask);
                     squareManager.SquareDrop(drop);
                     gamePhase = 3;
                 }
 
-                //if (Input.GetKeyDown(KeyCode.LeftArrow))
-                //{
-                //    squareManager.squareParent.transform.position += new Vector3(-1, 0, 0);
-                //}
-                //else if(Input.GetKeyDown(KeyCode.RightArrow))
-                //{
-                //    squareManager.squareParent.transform.position += new Vector3(1, 0, 0);
-                //}
+                
                 break;
             case 3:
                 squareManager.zeroRigid();
@@ -174,7 +168,7 @@ public class Main : MonoBehaviour
                     {
                         continue;
                     }
-                    //squareManager.gameSquareArray[n].transform.rotation = Quaternion.identity;
+                    
                     squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                     
                     //debugManager.InfoTextRegistration(n, debugManager.InfoDebugTextArray, gridObserver.gameSquareInfoArray);
@@ -193,7 +187,7 @@ public class Main : MonoBehaviour
                     //0.�����\���z�� 1�̃C���f�b�N�X�̂݌v�Z�X�^�[�g
                     //1.�����@�����̎���4������
                     //2.22 �̎� n = 2 ����ȊO��1
-                    gridObserver.NumFallPossibilitySet(i, gridObserver.gameSquareInfoArray, gridObserver.gameSquareBoolArray, pastDelete);
+                    gridObserver.NumFallPossibilitySet(i, gridObserver.gameSquareInfoArray, gridObserver.gameSquareBoolArray, pastDelete, horizontalBallNumbers);
 
                     //debugManager.InfoTextRegistration(i, debugManager.InfoDebugTextArray, gridObserver.gameSquareInfoArray);
                     //debugManager.BoolTextRegistration(i, debugManager.InfoDebugTextArray, gridObserver.gameSphereBoolArray);
@@ -224,7 +218,7 @@ public class Main : MonoBehaviour
                     //Vector2 effectPos = new Vector2(squareManager.squareParent.transform.position.x -1f, squareManager.squareParent.transform.position.y);
                     //Instantiate(fallEffect, effectPos, Quaternion.identity);
 
-                    StartCoroutine(judgeManager.ScoreAnimation(4.0f, 0.2f));
+                    //StartCoroutine(judgeManager.ScoreAnimation(4.0f, 0.2f,0));
                     //�w�L�T�S������t�F�[�Y��
                     gamePhase = 7;
                 }
@@ -276,7 +270,8 @@ public class Main : MonoBehaviour
                 break;
             case 7:
                // Debug.Log("hanntei ");
-                int Keseta = judgeManager.ShapeJudgement(gridObserver.gameSquareInfoArray, squareManager.gameSquareArray, gridObserver.gameSquareBoolArray);
+                int Keseta = judgeManager.ShapeJudgement(gridObserver.gameSquareInfoArray, squareManager.gameSquareArray, gridObserver.gameSquareBoolArray, horizontalBallNumbers, verticalBallNumbers, gridObjectManager.gridObjectArray);
+               judgeManager.SetConnectColor(gridObserver.gameSquareInfoArray, squareManager.gameSquareArray);
                 if (Keseta == 0)
                 {
                     //���̃s�[�X�𗎂Ƃ�
@@ -292,7 +287,7 @@ public class Main : MonoBehaviour
                         squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                         
                     }
-                    for (int i = 156; i < 180; i++)
+                    for (int i = horizontalBallNumbers * (verticalBallNumbers - 2); i < horizontalBallNumbers * verticalBallNumbers; i++)
                     {
                         if (gridObserver.gameSquareBoolArray[i] != 2)
                         {
@@ -302,7 +297,7 @@ public class Main : MonoBehaviour
                         return;
                     }
                     gamePhase = 1;
-                    //Debug.Log("kesenai");
+                    
                 }
                 else if (Keseta == 1)
                 {
@@ -313,7 +308,9 @@ public class Main : MonoBehaviour
                         {
                             continue;
                         }
+
                         //squareManager.gameSquareArray[n].transform.rotation = Quaternion.identity;
+
                         squareManager.gameSquareArray[n].transform.position = gridObjectManager.gridObjectArray[n].transform.position;
                     }
                     //�ēx���������
@@ -377,13 +374,13 @@ public class Main : MonoBehaviour
     {
         //3.n = 1 �@�̎� �����z����m�F �����̈ړ�����m�F �����\���z��y�ѐ����z���n��0�ɂ���
         //�ړ�����i�[����ϐ�numInto
-        int numInto = gridObserver.ReturnNumFallInto(number, gridObserver.gameSquareInfoArray);
+        int numInto = gridObserver.ReturnNumFallInto(number, gridObserver.gameSquareInfoArray,horizontalBallNumbers);
 
         //4.�����ړ�
         gridObserver.NumFall(number, numInto, gridObserver.gameSquareInfoArray, gridObserver.gameSquareBoolArray);
 
         //�����\���̍Ċm�F�A�z��ւ̑��
-        gridObserver.NumFallPossibilitySet(numInto, gridObserver.gameSquareInfoArray, gridObserver.gameSquareBoolArray, pastDelete);
+        gridObserver.NumFallPossibilitySet(numInto, gridObserver.gameSquareInfoArray, gridObserver.gameSquareBoolArray, pastDelete,horizontalBallNumbers);
 
         gridObserver.FallBallAddToList(number, numInto);
         //�f�o�b�O�e�L�X�g

@@ -8,18 +8,24 @@ public class GridObserver : MonoBehaviour
     // Start is called before the first frame update
     [System.NonSerialized]
     //現在のグリッドの様子が数字で入っている配列
-    public int[] gameSquareInfoArray = new int[180];
+    public int[] gameSquareInfoArray;
 
     [System.NonSerialized]
     //オブジェクトの落下可能性が0~2で入っている配列
-    public int[] gameSquareBoolArray = new int[180];
+    public int[] gameSquareBoolArray;
 
     //GameObject[] ObjectCheckArray = new GameObject[3];
     //落下するボールを管理（アニメーションをかけるボールを管理)
     [System.NonSerialized]
     public List<List<int>> FallBallIndexList = new List<List<int>>();
+    public void ArrayAwake(int squarenumbers)
+    {
+        gameSquareInfoArray = new int[squarenumbers];
+        gameSquareBoolArray = new int[squarenumbers];
+    }
     public void ArrayInfoInit(int[] array)
     {
+        
         for (int i = 0; i < array.Length; i++)
         {
             array[i] = 0;
@@ -28,6 +34,7 @@ public class GridObserver : MonoBehaviour
 
     public void ArrayBoolInfoInit(int[] array)
     {
+        
         for (int i = 0; i < array.Length; i++)
         {
             array[i] = 0;
@@ -121,7 +128,7 @@ public class GridObserver : MonoBehaviour
         return Array.IndexOf(GridObjArray, targetInSquares[minIndex].gameObject);
     }
 
-    public void NumFallPossibilitySet(int number, int[] GSIArray, int[] GSBArray, bool pastDelete)
+    public void NumFallPossibilitySet(int number, int[] GSIArray, int[] GSBArray, bool pastDelete, int horizontal)
     {
         //配列に何もないもしくはその場所の落下可能性がない場合、リターン
         if (GSIArray[number] < 1)
@@ -140,7 +147,7 @@ public class GridObserver : MonoBehaviour
 
         if (
             //最下層
-            number < 12
+            number < horizontal
             ////右端でbにボールがある
             //|| (number % 19 == 9 && GSBArray[number - 10] > 1)
             ////左端でcにボールがある場合
@@ -152,7 +159,7 @@ public class GridObserver : MonoBehaviour
         {
             GSBArray[number] = 2;
         }
-        else if (GSBArray[number - 12] > 1)
+        else if (GSBArray[number - horizontal] > 1)
         {
             GSBArray[number] = 2;
         }
@@ -231,14 +238,14 @@ public class GridObserver : MonoBehaviour
     }
 
     //条件分岐判定用
-    public int ReturnNumFallInto(int number, int[] GSIArray)
+    public int ReturnNumFallInto(int number, int[] GSIArray ,int horizontal)
     {
         int returnNum;
         
         //直下にボールがない
-        if (GSIArray[number - 12] < 1)
+        if (GSIArray[number - horizontal] < 1)
         {
-            returnNum = number - 12;
+            returnNum = number - horizontal;
         }
         
         //両方にボールがある
